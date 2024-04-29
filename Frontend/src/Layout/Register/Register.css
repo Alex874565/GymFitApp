@@ -1,0 +1,51 @@
+/* Register.css */
+
+.register-container {
+  display: flex;
+  justify-content: center; /* Aliniere pe orizontală la mijloc */
+  align-items: center; /* Aliniere pe verticală la mijloc */
+  height: 100vh; /* Înălțimea întregii pagini */
+}
+
+.register-page {
+  width: 300px; /* Lățimea formularului */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff; /* Fundal alb */
+}
+
+.register-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-register {
+  width: 85%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.input-register:focus {
+  outline: none;
+  border-color: #007bff; /* Bordură albastră la focus */
+}
+
+.errmsg {
+  color: #ff0000; /* Culoare roșie pentru mesajul de eroare */
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}

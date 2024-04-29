@@ -1,0 +1,129 @@
+.Programs {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 2rem;
+  background-color: rgba(36, 68, 96, 0.8);
+  /*margin-bottom: 5rem;*/
+  transition: background-color 0.5s ease;
+}
+
+.programs-header {
+  display: flex;
+  gap: 5rem;
+  font-weight: bold;
+  font-size: 3rem;
+  color: white;
+  justify-content: center;
+  text-transform: uppercase;
+  font-style: italic;
+  padding-top: 2rem;
+}
+
+.programs-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  padding-bottom: 2rem;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(128, 128, 128, 0.9);
+  padding: 0.8rem;
+  gap: 1rem;
+  color: white;
+  justify-content: space-between;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  text-align: center;
+  max-width: 300px;
+  /*fill: white;*/
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+}
+
+.svg-icon {
+  width: 40%;
+  height: 50%;
+  fill: white;
+}
+
+.program-heading {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.program-details {
+  font-size: 1rem;
+  line-height: 30px;
+  margin: 0;
+}
+
+.join-now {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.join-now button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: #ea6c0dff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.join-now img {
+  width: 1rem;
+  margin-left: 0.5rem;
+}
+
+.category:hover {
+  background-color: #ea6c0dff;
+  /*cursor: pointer;*/
+}
+
+.category:hover .join-now button {
+  background-color: grey;
+}
+
+.join-now button:hover {
+  background-color: #ea6c0dff;
+}
+
+.programs-blur {
+  width: 15rem;
+  height: 19rem;
+  left: 20;
+}
+
+@media screen and (max-width: 768px) {
+  .programs-header {
+    flex-direction: column;
+    gap: 1px;
+    font-size: x-large;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .programs-categories {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 80%; */
+  }
+}

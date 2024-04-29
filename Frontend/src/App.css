@@ -1,0 +1,47 @@
+:root {
+  --lightgray: #d9d9d9;
+  --gray: #9c9c9c;
+  --blue: #c6dadf;
+  --darkblue: #c6dadf;
+  --appcolor: #3c3f45;
+  --orange: #ea6c0dff;
+  --orangeEffect: linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* .App {
+  /*background-color: darkgrey;*/
+
+.stroke-text {
+  color: transparent;
+  font-family: Arial, helvetica, sans-serif;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+.btn {
+  background-color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+  border: 4px solid transparent;
+  transition: 300ms all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.blur {
+  /* background: rgba(253, 120, 43, 0.69); */
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: -9;
+}

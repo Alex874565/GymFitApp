@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 10rem;
+  height: 3rem;
+}
+
+.header-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-menu li:hover {
+  cursor: pointer;
+  /*color: rgba(2, 2, 93, 0.85);*/
+  color: #ea6c0dff;
+}
+
+.btn:hover {
+  cursor: pointer;
+  /*color: rgba(2, 2, 93, 0.85);*/
+  color: #ea6c0dff;
+}
+
+@media screen and (max-width: 768px) {
+  .header:nth-child(2) {
+    position: fixed;
+    right: 2rem;
+    z-index: 99;
+  }
+
+  .header-menu {
+    flex-direction: column;
+    background-color: var(--appcolor);
+    padding: 2rem;
+  }
+}
