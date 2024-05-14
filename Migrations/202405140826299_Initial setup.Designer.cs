@@ -7,13 +7,13 @@ namespace GymFit.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Renameinshcedulecourse : IMigrationMetadata
+    public sealed partial class Initialsetup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Renameinshcedulecourse));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialsetup));
         
         string IMigrationMetadata.Id
         {
-            get { return "202404090849120_Rename in shcedule course"; }
+            get { return "202405140826299_Initial setup"; }
         }
         
         string IMigrationMetadata.Source

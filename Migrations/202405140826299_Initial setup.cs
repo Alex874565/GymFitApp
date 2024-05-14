@@ -15,7 +15,7 @@
                         Name = c.String(),
                         Email = c.String(),
                         Password = c.String(),
-                        Role = c.Int(nullable: false),
+                        Role = c.String(),
                         Subscription_ID = c.Int(),
                         CourseSchedule_ID = c.Int(),
                     })
@@ -68,7 +68,7 @@
                         Description = c.String(),
                         Email = c.String(),
                         Password = c.String(),
-                        Role = c.Int(nullable: false),
+                        Role = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -80,22 +80,22 @@
                         StartTime = c.DateTime(nullable: false),
                         EndTime = c.DateTime(nullable: false),
                         ClientNo = c.Int(nullable: false),
-                        ScheduledClass_ID = c.Int(),
+                        ScheduledCourse_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Course", t => t.ScheduledClass_ID)
-                .Index(t => t.ScheduledClass_ID);
+                .ForeignKey("dbo.Course", t => t.ScheduledCourse_ID)
+                .Index(t => t.ScheduledCourse_ID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.CourseSchedule", "ScheduledClass_ID", "dbo.Course");
+            DropForeignKey("dbo.CourseSchedule", "ScheduledCourse_ID", "dbo.Course");
             DropForeignKey("dbo.Client", "CourseSchedule_ID", "dbo.CourseSchedule");
             DropForeignKey("dbo.Client", "Subscription_ID", "dbo.Subscription");
             DropForeignKey("dbo.Course", "Subscription_ID", "dbo.Subscription");
             DropForeignKey("dbo.Course", "Trainer_ID", "dbo.Trainer");
-            DropIndex("dbo.CourseSchedule", new[] { "ScheduledClass_ID" });
+            DropIndex("dbo.CourseSchedule", new[] { "ScheduledCourse_ID" });
             DropIndex("dbo.Course", new[] { "Subscription_ID" });
             DropIndex("dbo.Course", new[] { "Trainer_ID" });
             DropIndex("dbo.Client", new[] { "CourseSchedule_ID" });
