@@ -20,7 +20,7 @@ namespace GymFit.Controllers
 
         GymFitContext db = new GymFitContext();
 
-        public class UserData
+        public class LoginUserData
         {
             public string email { get; set; }
             public string password { get; set; }
@@ -32,7 +32,7 @@ namespace GymFit.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public IResult Login([FromBody] UserData user_data)
+        public IResult Login([FromBody] LoginUserData user_data)
         {
             var clients = from client in db.Clients
                           where client.Email.Equals(user_data.email)
