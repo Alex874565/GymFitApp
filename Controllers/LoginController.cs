@@ -7,6 +7,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
+
 namespace GymFit.Controllers
 {
     [Route("api/[controller]")]
@@ -15,15 +18,28 @@ namespace GymFit.Controllers
     {
         private IConfiguration _config;
 
+        GymFitContext db = new GymFitContext();
+
+        public class UserData
+        {
+            public string email { get; set; }
+            public string password { get; set; }
+        }
+
         public LoginController(IConfiguration config)
         {
             _config = config;
         }
         [AllowAnonymous]
         [HttpPost]
-        public IResult Login([FromBody] Models.User user)
+        public IResult Login([FromBody] UserData user_data)
         {
-            //if (user.getEmail() == "test" && user.getPassword() == "test")
+            var clients = from client in db.Clients
+                          where client.Email.Equals(user_data.email)
+                          && client.Password.Equals(user_data.password)
+                          select client;
+            var user = clients.FirstOrDefault();
+            if (user != null)
             {
                 var issuer = _config["Jwt:Issuer"];
                 var audience = _config["Jwt:Audience"];
@@ -36,6 +52,7 @@ namespace GymFit.Controllers
                         new Claim("Id", Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("Password", user.Password),
+                        new Claim("Role", user.Role),
                         new Claim(JwtRegisteredClaimNames.Jti,
                         Guid.NewGuid().ToString())
                     }),

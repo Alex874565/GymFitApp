@@ -102,3 +102,4 @@ C:\Users\Alex\source\repos\GymFit\GymFit\obj\Debug\net7.0\refint\GymFit.dll
 C:\Users\Alex\source\repos\GymFit\GymFit\obj\Debug\net7.0\GymFit.pdb
 C:\Users\Alex\source\repos\GymFit\GymFit\obj\Debug\net7.0\GymFit.genruntimeconfig.cache
 C:\Users\Alex\source\repos\GymFit\GymFit\obj\Debug\net7.0\ref\GymFit.dll
+C:\Users\Alex\source\repos\GymFit\GymFit\obj\Debug\net7.0\GymFit.Migrations.testacum.resources

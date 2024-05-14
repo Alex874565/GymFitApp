@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace GymFit.Models
 {
-    public enum Role { Admin, Client }
 
     public class User
     {
@@ -11,7 +10,7 @@ namespace GymFit.Models
         public int ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public Role Role { get; set; }
+        public string Role { get; set; }
 
 
     }
