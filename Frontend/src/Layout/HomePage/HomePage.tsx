@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "./Header/Header";
+import { Header } from "./Header/Header.jsx";
 import Hero from "./Hero/Hero";
 import { Reasons } from "./Reasons/Reasons";
 import { Testimonials } from "./Testimonials/Testimonials";
@@ -9,7 +9,6 @@ import { Programs } from "./Programs/Programs";
 export const HomePage = () => {
   return (
     <div>
-      {/*<Header />*/}
       <Hero />
       <Programs />
       <Reasons />
