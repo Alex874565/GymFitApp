@@ -15,7 +15,6 @@ const User = () => {
   });
 
   useEffect(() => {
-    // Decode the token to get user data
     const token = localStorage.getItem("token");
 
     if (token) {

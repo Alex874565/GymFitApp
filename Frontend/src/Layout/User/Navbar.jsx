@@ -7,8 +7,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-
-    <nav className="bg-blue-800 bg-opacity-50 backdrop-blur-md p-4 text-white flex justify-between items-center fixed w-full z-20">
+    <nav className="bg-blue-900 bg-opacity-60 backdrop-blur-md p-4 text-white flex justify-between items-center fixed w-full z-20">
       <div className="flex-grow text-center">
         <div className="flex justify-center space-x-4">
           <Link to="/trainers" className="hover:underline">
