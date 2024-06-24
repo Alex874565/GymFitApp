@@ -15,9 +15,9 @@ const CourseSchedulePage = () => {
     const fetchCourse = async () => {
       try {
         const response = await axios.get(
-          `https://gymfitapi.azurewebsites.net/odata/Courses(${courseId})`
+          `https://gymfitapi.azurewebsites.net/odata/Courses?$filter=ID eq '${courseId}'`
         );
-        setCourse(response.data);
+        setCourse(response.data.value[0]);
       } catch (err) {
         console.error("API Fetch Error for course:", err);
         setError("Failed to fetch course");
@@ -27,7 +27,7 @@ const CourseSchedulePage = () => {
     const fetchSchedules = async () => {
       try {
         const response = await axios.get(
-          `https://gymfitapi.azurewebsites.net/odata/CourseSchedules?$filter=scheduledCourse/id eq ${courseId}`
+          `https://gymfitapi.azurewebsites.net/odata/CourseSchedules?$filter=ScheduledCourse eq '${courseId}'`
         );
         setSchedules(response.data.value);
       } catch (err) {
@@ -54,12 +54,12 @@ const CourseSchedulePage = () => {
       {error && <p className="text-red-500">{error}</p>}
       {course && (
         <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-          <h2 className="text-2xl font-bold mb-4">{course.name}</h2>
+          <h2 className="text-2xl font-bold mb-4">{course.Name}</h2>
           <p className="text-gray-700 mb-2">
-            Description: {course.description}
+            Description: {course.Description}
           </p>
           <p className="text-gray-700 mb-2">
-            Duration: {course.duration} minutes
+            Duration: {course.Duration} minutes
           </p>
         </div>
       )}
@@ -72,27 +72,28 @@ const CourseSchedulePage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {schedules
           .filter(
-            (schedule) =>
-              new Date(schedule.startTime).toDateString() ===
-              selectedDate.toDateString()
+            (schedule) => {
+              var date = (new Date(schedule.StartTime)).toDateString()
+              return date === selectedDate.toDateString()
+            }
           )
           .map((schedule) => (
             <div
-              key={schedule.id}
+              key={schedule.ID}
               className="bg-white p-6 rounded-lg shadow-lg"
             >
               <h3 className="text-xl font-bold mb-2">
-                {schedule.scheduledCourse.name}
+                {course.Name}
               </h3>
               <p className="text-gray-700 mb-2">
-                Trainer: {schedule.scheduledCourse.trainer.name}
+                Trainer: {course.Trainer_Id}
               </p>
               <p className="text-gray-700 mb-2">
-                Time: {new Date(schedule.startTime).toLocaleTimeString()} -{" "}
-                {new Date(schedule.endTime).toLocaleTimeString()}
+                Time: {new Date(schedule.StartTime).toLocaleTimeString()} -{" "}
+                {new Date(schedule.EndTime).toLocaleTimeString()}
               </p>
               <button
-                onClick={() => handleEnroll(schedule.id)}
+                onClick={() => handleEnroll(schedule.Trainer_Id)}
                 className="text-white bg-blue-500 hover:bg-blue-700 p-2 rounded"
               >
                 Enroll

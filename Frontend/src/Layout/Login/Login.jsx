@@ -7,7 +7,6 @@ import { jwtDecode } from "jwt-decode";
 const LOGIN_URL = "/api/Login";
 
 export const Login = () => {
-  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,9 +41,9 @@ export const Login = () => {
       );
 
       const accessToken = response?.data;
-      const roles = jwtDecode(response?.data).Role;
+      const role = jwtDecode(response?.data).Role;
 
-      setAuth({ email, roles, accessToken });
+      localStorage.setItem("token", accessToken);
 
       setEmail("");
       setPwd("");
@@ -55,13 +54,13 @@ export const Login = () => {
         navigate("/user");
       }
 
-      console.log(roles);
+      console.log(role);
 
-      if (roles.includes("Client")) {
+      if (role.includes("Client")) {
         navigate("/user", { replace: true });
-      } else if (roles.includes("Admin")) {
+      } else if (role.includes("Admin")) {
         navigate("/admin", { replace: true });
-      } else if (roles.includes("Trainer")) {
+      } else if (role.includes("Trainer")) {
         navigate("/trainer", { replace: true });
       } else {
         navigate("/missing", { replace: true });

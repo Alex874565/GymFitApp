@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProfileMenu from "./ProfileMenu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -7,15 +8,15 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-800 p-4 text-white flex justify-between items-center">
       <div className="flex space-x-4">
-        <a href="#trainers" className="hover:underline">
+        <Link to="/trainers" className="hover:underline">
           Trainers
-        </a>
-        <a href="#subscription" className="hover:underline">
+        </Link>
+        <Link to="/subscription" className="hover:underline">
           Subscription
-        </a>
-        <a href="#classes" className="hover:underline">
+        </Link>
+        <Link to="/courses" className="hover:underline">
           Classes
-        </a>
+        </Link>
       </div>
       <div className="relative">
         <img
