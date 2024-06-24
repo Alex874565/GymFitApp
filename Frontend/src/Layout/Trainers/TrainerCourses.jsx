@@ -37,7 +37,7 @@ export const TrainerCourses = ({trainerId}) => {
 
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-4">Courses</h2>
+            <h2 className="font-bold mb-4">Courses</h2>
             {error && <p className="text-red-500">{error}</p>}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {courses.length > 0 ? (

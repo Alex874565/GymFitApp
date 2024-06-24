@@ -1,23 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    // Logout logic here
-    console.log("Logged out");
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
-      <Link
-        to="/account"
-        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-      >
-        Contul meu
-      </Link>
+    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
       <button
         onClick={handleLogout}
-        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+        className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
       >
         Logout
       </button>
