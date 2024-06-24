@@ -12,6 +12,7 @@ namespace GymFit.Models
 
         public string Description { get; set; }
 
+        public int Course_Id { get; set; }
         public DateTime StartDate { get; set; }
 
         public string Duration { get; set; }
