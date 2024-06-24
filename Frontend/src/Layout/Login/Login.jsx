@@ -130,5 +130,5 @@ export const Login = () => {
         </Link>
       </p>
     </section>
-  );
+  )
 };

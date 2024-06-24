@@ -17,7 +17,7 @@ const CourseSchedulePage = () => {
         const response = await axios.get(
           `https://gymfitapi.azurewebsites.net/odata/Courses?$filter=ID eq '${courseId}'`
         );
-        setCourse(response.data.value[0]);
+        setCourse(response.data.value.filter(course => course.ID == courseId)[0]);
       } catch (err) {
         console.error("API Fetch Error for course:", err);
         setError("Failed to fetch course");
@@ -29,7 +29,7 @@ const CourseSchedulePage = () => {
         const response = await axios.get(
           `https://gymfitapi.azurewebsites.net/odata/CourseSchedules?$filter=ScheduledCourse eq '${courseId}'`
         );
-        setSchedules(response.data.value);
+        setSchedules(response.data.value.filter(schedule => schedule.ScheduledCourse == courseId));
       } catch (err) {
         console.error("API Fetch Error for schedules:", err);
         setError("Failed to fetch schedules");
@@ -93,7 +93,7 @@ const CourseSchedulePage = () => {
                 {new Date(schedule.EndTime).toLocaleTimeString()}
               </p>
               <button
-                onClick={() => handleEnroll(schedule.Trainer_Id)}
+                onClick={() => handleEnroll(course.Id)}
                 className="text-white bg-blue-500 hover:bg-blue-700 p-2 rounded"
               >
                 Enroll

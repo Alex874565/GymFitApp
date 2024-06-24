@@ -2,6 +2,7 @@ import {Link, useParams} from "react-router-dom";
 import React, {useEffect} from "react";
 import axios from "axios";
 import {useState} from "react";
+import {TrainerCourses} from "./TrainerCourses";
 
 export const TrainerDetails = () => {
     const [trainer, setTrainer] = useState(null);
@@ -12,8 +13,7 @@ export const TrainerDetails = () => {
             const response = await axios.get(
                 `https://gymfitapi.azurewebsites.net/odata/Trainers?$filter=ID eq '${trainerId}'`
             );
-            setTrainer(response.data.value[0]);
-            console.log(response);
+            setTrainer(response.data.value.filter((trainer) => {return trainer.ID == trainerId})[0]);
         } catch (err) {
             console.error("API Fetch Error for course:", err);
             setError("Failed to fetch course");
@@ -42,6 +42,7 @@ export const TrainerDetails = () => {
             />
         </div>
         )}
+        <TrainerCourses trainerId={trainerId}/>
         </div>
     )
 };

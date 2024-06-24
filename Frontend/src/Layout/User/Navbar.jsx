@@ -11,8 +11,8 @@ const Navbar = () => {
         <Link to="/trainers" className="hover:underline">
           Trainers
         </Link>
-        <Link to="/subscription" className="hover:underline">
-          Subscription
+        <Link to="/subscriptions" className="hover:underline">
+          Subscriptions
         </Link>
         <Link to="/courses" className="hover:underline">
           Classes
