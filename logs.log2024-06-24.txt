@@ -4,3 +4,12 @@
 2024-06-24 17:07:20,608 [9] INFO  App  
  GET Clients 
  
+2024-06-24 18:27:25,000 [6] INFO  App  
+ GET Clients 
+ 
+2024-06-24 18:27:36,188 [6] INFO  App  
+ GET Clients 
+ 
+2024-06-24 18:27:43,619 [4] INFO  App  
+ GET Clients 
+ 
