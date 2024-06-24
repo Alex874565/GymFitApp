@@ -1,6 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {TrainerCourses} from "./TrainerCourses";
+import TrainerCourses from "./TrainerCourses";
 
 const TrainerCard = ({ trainer }) => {
   return (
@@ -8,7 +7,7 @@ const TrainerCard = ({ trainer }) => {
       <img
         src={trainer.Photo}
         alt={trainer.Name}
-        className="w-full h-32  object-cover"
+        className="w-full h-32 object-cover"
       />
       <div className="p-4">
         <h3 className="text-xl font-bold mb-2">{trainer.Name}</h3>
@@ -19,7 +18,9 @@ const TrainerCard = ({ trainer }) => {
         <p className="text-gray-700 mb-2">Description: {trainer.Description}</p>
         <p className="text-gray-700 mb-2">Email: {trainer.Email}</p>
       </div>
-    <TrainerCourses trainerId={trainer.ID}/>
+      <div className="p-4">
+        <TrainerCourses trainerId={trainer.ID} />
+      </div>
     </div>
   );
 };

@@ -50,7 +50,7 @@ export const Trainers = () => {
           <h2 className="text-3xl font-bold my-4 text-center text-white">
             Trainers
           </h2>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {trainers.length > 0 ? (
               trainers.map((trainer) => (

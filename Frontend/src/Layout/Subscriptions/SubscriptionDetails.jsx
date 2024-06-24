@@ -1,7 +1,7 @@
-export const SubscriptionDetails = () => {
-    return (
-        <div>
+import React from "react";
 
-        </div>
-    )
-}
+const SubscriptionDetails = () => {
+  return <div></div>;
+};
+
+export default SubscriptionDetails;

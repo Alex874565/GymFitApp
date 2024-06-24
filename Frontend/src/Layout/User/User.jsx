@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import img3 from "../../assets/image3.png";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const [error, setError] = useState(null);
@@ -35,7 +35,11 @@ const User = () => {
 
         const parsedResponse = response.data;
         if (parsedResponse && Array.isArray(parsedResponse.value)) {
-          setSubscription(parsedResponse.value.filter(subscription => subscription.ID == jwtDecode(token).Subscription)[0]);
+          setSubscription(
+            parsedResponse.value.filter(
+              (subscription) => subscription.ID == jwtDecode(token).Subscription
+            )[0]
+          );
           console.log("Subscription set to:", parsedResponse.value[0]);
         } else {
           console.error(
@@ -51,40 +55,41 @@ const User = () => {
     };
 
     fetchSubscription();
-
   }, []);
 
-  useEffect(() =>
-      {
-        // Fetch courses data
-        const fetchCourses = async () => {
-          try {
-            const response = await axios.get(
-                "https://gymfitapi.azurewebsites.net/odata/Courses"
-            );
-            console.log("Courses API Response (raw):", response.data);
+  useEffect(() => {
+    // Fetch courses data
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(
+          "https://gymfitapi.azurewebsites.net/odata/Courses"
+        );
+        console.log("Courses API Response (raw):", response.data);
 
-            const parsedResponse = response.data;
-            if (parsedResponse && Array.isArray(parsedResponse.value)) {
-              setCourses(parsedResponse.value.filter(course => course.Subscription == subscription.ID));
-              console.log("Courses set to:", parsedResponse.value);
-            } else {
-              console.error(
-                  "Unexpected response format for courses:",
-                  parsedResponse
-              );
-              setError("Unexpected response format for courses");
-            }
-          } catch (err) {
-            console.error("API Fetch Error for courses:", err);
-            setError("Failed to fetch courses");
-          }
-        };
-        if(subscription) {
-          fetchCourses()
+        const parsedResponse = response.data;
+        if (parsedResponse && Array.isArray(parsedResponse.value)) {
+          setCourses(
+            parsedResponse.value.filter(
+              (course) => course.Subscription == subscription.ID
+            )
+          );
+          console.log("Courses set to:", parsedResponse.value);
+        } else {
+          console.error(
+            "Unexpected response format for courses:",
+            parsedResponse
+          );
+          setError("Unexpected response format for courses");
         }
+      } catch (err) {
+        console.error("API Fetch Error for courses:", err);
+        setError("Failed to fetch courses");
       }
-  , [subscription])
+    };
+    if (subscription) {
+      fetchCourses();
+    }
+  }, [subscription]);
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -99,7 +104,7 @@ const User = () => {
         <div className="relative z-10 flex-grow flex items-center justify-center">
           <div className="bg-blue-900 bg-opacity-60 p-6 rounded-lg w-1/2 text-white">
             <h1 className="text-4xl font-bold text-center mb-4">
-              User Information
+              {userData.name}'s Information
             </h1>
             <p>
               <strong>Name:</strong> {userData.name}
@@ -135,9 +140,13 @@ const User = () => {
                     </h3>
                     <ul>
                       {courses.map((course) => {
-                          <Link to={`course-schedule/${course.ID}`} key={course.ID} className="mt-2">
-                            {course.Name}
-                          </Link>
+                        <Link
+                          to={`course-schedule/${course.ID}`}
+                          key={course.ID}
+                          className="mt-2"
+                        >
+                          {course.Name}
+                        </Link>;
                       })}
                     </ul>
                   </>

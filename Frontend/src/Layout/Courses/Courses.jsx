@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../User/Navbar";
 import CourseCard from "./CourseCard";
 import coursesBG from "../../assets/cycling-img.jpg";
-import Navbar from "../User/Navbar";
 
 export const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -45,21 +45,20 @@ export const Courses = () => {
           alt="Courses Background"
           className="absolute w-full h-full object-cover blur-sm"
         />
-        <div className="relative flex-grow">
-          <div className="container mx-auto p-4">
-            <h2 className="text-3xl font-bold my-4 text-center text-white">
-              Courses
-            </h2>
-            {error && <p className="text-red-500 text-center">{error}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {courses.length > 0 ? (
-                courses.map((course) => (
-                  <CourseCard key={course.ID} course={course} />
-                ))
-              ) : (
-                <p className="text-white text-center">No courses found</p>
-              )}
-            </div>
+        <div className="absolute w-full h-full bg-black opacity-40"></div>
+        <div className="relative flex-grow container mx-auto p-4">
+          <h2 className="text-3xl font-bold my-4 text-center text-white">
+            Courses
+          </h2>
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {courses.length > 0 ? (
+              courses.map((course) => (
+                <CourseCard key={course.ID} course={course} />
+              ))
+            ) : (
+              <p className="text-white text-center">No courses found</p>
+            )}
           </div>
         </div>
       </div>
