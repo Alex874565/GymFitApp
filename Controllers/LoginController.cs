@@ -69,12 +69,12 @@ namespace GymFit.Controllers
                 var stringToken = tokenHandler.WriteToken(token);
                 return Results.Ok(stringToken);
             } else {
-                var trainers = from client in db.Clients
-                              where client.Email.Equals(user_data.email)
-                              && client.Password.Equals(user_data.password)
-                              select client;
-                user = trainers.FirstOrDefault();
-                if (user != null)
+                var trainers = from trainer in db.Trainers
+                              where trainer.Email.Equals(user_data.email)
+                              && trainer.Password.Equals(user_data.password)
+                              select trainer;
+                var user2 = trainers.FirstOrDefault();
+                if (user2 != null)
                 {
                     var issuer = _config["Jwt:Issuer"];
                     var audience = _config["Jwt:Audience"];
@@ -85,9 +85,9 @@ namespace GymFit.Controllers
                         Subject = new ClaimsIdentity(new[]
                         {
                         new Claim("Id", Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                        new Claim("Password", user.Password),
-                        new Claim("Role", user.Role),
+                        new Claim(JwtRegisteredClaimNames.Email, user2.Email),
+                        new Claim("Password", user2.Password),
+                        new Claim("Role", user2.Role),
                         new Claim(JwtRegisteredClaimNames.Jti,
                         Guid.NewGuid().ToString())
                     }),
