@@ -1,6 +1,7 @@
 ﻿using GymFit.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -39,8 +40,11 @@ namespace GymFit.Controllers
             var users = from client in db.Clients
                           where client.Email.Equals(user_data.email)
                           select client;
-            if (users.Count() != 0)
+            System.Diagnostics.Debug.WriteLine(users.Count());
+            if (users.Count() != '0')
             {
+
+                System.Diagnostics.Debug.Write("ok");
                 Client user = new Client();
                 user.Name = user_data.name;
                 user.Email = user_data.email;

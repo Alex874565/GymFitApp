@@ -14,7 +14,8 @@
           "Microsoft.AspNetCore.OData": "8.2.5",
           "Microsoft.AspNetCore.OpenApi": "7.0.11",
           "Microsoft.Data.SqlClient": "5.2.0",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "log4net": "2.0.17"
         },
         "runtime": {
           "GymFit.dll": {}
@@ -70,6 +71,17 @@
           "lib/netstandard2.1/EntityFramework.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.400.420.21404"
+          }
+        }
+      },
+      "log4net/2.0.17": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "6.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/log4net.dll": {
+            "assemblyVersion": "2.0.17.0",
+            "fileVersion": "2.0.17.0"
           }
         }
       },
@@ -928,6 +940,13 @@
       "sha512": "sha512-yj1+/4tci7Panu3jKDHYizxwVm0Jvm7b7m057b5h4u8NUHGCR8WIWirBTw+8EptRffwftIWPBeIRGNKD1ewEMQ==",
       "path": "entityframework/6.4.4",
       "hashPath": "entityframework.6.4.4.nupkg.sha512"
+    },
+    "log4net/2.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qnnDf/ubJzwm2i1xH7nRMjEDoD+ctse7nZDqb+p7L1PvZc6ykpMoEesWr1/9hFqlsbII2v9e8yyQHJhoDQh7ZA==",
+      "path": "log4net/2.0.17",
+      "hashPath": "log4net.2.0.17.nupkg.sha512"
     },
     "Microsoft.AspNet.OData/7.7.4": {
       "type": "package",

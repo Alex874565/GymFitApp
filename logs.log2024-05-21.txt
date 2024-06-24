@@ -1,0 +1,12 @@
+2024-05-21 11:32:12,660 [6] INFO  App  
+ GET Clients 
+ 
+2024-05-21 11:35:01,884 [8] INFO  App  
+ GET Clients 
+ 
+2024-05-21 11:41:30,577 [8] INFO  App  
+ GET Clients 
+ 
+2024-05-21 12:01:38,243 [20] INFO  App  
+ GET Clients 
+ 

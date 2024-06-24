@@ -68,6 +68,43 @@ namespace GymFit.Controllers
                 var jwtToken = tokenHandler.WriteToken(token);
                 var stringToken = tokenHandler.WriteToken(token);
                 return Results.Ok(stringToken);
+            } else {
+                var trainers = from client in db.Clients
+                              where client.Email.Equals(user_data.email)
+                              && client.Password.Equals(user_data.password)
+                              select client;
+                user = trainers.FirstOrDefault();
+                if (user != null)
+                {
+                    var issuer = _config["Jwt:Issuer"];
+                    var audience = _config["Jwt:Audience"];
+                    var key = Encoding.ASCII.GetBytes
+                    (_config["Jwt:Key"]);
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new[]
+                        {
+                        new Claim("Id", Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        new Claim("Password", user.Password),
+                        new Claim("Role", user.Role),
+                        new Claim(JwtRegisteredClaimNames.Jti,
+                        Guid.NewGuid().ToString())
+                    }),
+                        Expires = DateTime.UtcNow.AddMinutes(5),
+                        Issuer = issuer,
+                        Audience = audience,
+                        SigningCredentials = new SigningCredentials
+                        (new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha512Signature)
+                    };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    var jwtToken = tokenHandler.WriteToken(token);
+                    var stringToken = tokenHandler.WriteToken(token);
+                    return Results.Ok(stringToken);
+                }
+
             }
             return Results.Unauthorized();
         }

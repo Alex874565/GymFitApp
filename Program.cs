@@ -9,6 +9,12 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
+using log4net.Config;
+using log4net.Core;
+using log4net;
+using System.Reflection;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
 
 static IEdmModel GetEdmModel()
 {
@@ -21,8 +27,13 @@ static IEdmModel GetEdmModel()
     return builder.GetEdmModel();
 }
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+XmlConfigurator.Configure(new FileInfo("log4net.config"));
+builder.Services.AddSingleton(LogManager.GetLogger(typeof(Program)));
+
+builder.Services.AddExceptionHandler(options => { options.ExceptionHandlingPath = "/log_error"; });
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers().AddOData(
@@ -80,11 +91,18 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 var app = builder.Build();
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+
+app.UseExceptionHandler("/log_error");
+//app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+app.UseCors(builder => builder
+       .AllowAnyHeader()
+       .AllowAnyMethod()
+       .AllowAnyOrigin()
+    );
+
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
