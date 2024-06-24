@@ -12,8 +12,6 @@ namespace GymFit.Models
 
         public string Description { get; set; }
 
-        public virtual List<int> Course_Ids { get; set; }
-
         public DateTime StartDate { get; set; }
 
         public string Duration { get; set; }
