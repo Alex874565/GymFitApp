@@ -11,7 +11,7 @@ namespace GymFit.Models
 
         public int Duration { get; set; }
 
-        public virtual Trainer Trainer { get; set; }
+        public int Trainer_Id { get; set; }
 
         public string Description { get; set; }
 
