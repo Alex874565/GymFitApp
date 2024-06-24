@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const LOGIN_URL = "/api/Login";
 
@@ -40,19 +41,27 @@ export const Login = () => {
         }
       );
 
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
+      const accessToken = response?.data;
+      const roles = jwtDecode(response?.data).Role;
 
       setAuth({ email, roles, accessToken });
 
       setEmail("");
       setPwd("");
 
-      if (roles.includes(2001)) {
+      console.log(response.status);
+
+      if (response.status === 200) {
+        navigate("/user");
+      }
+
+      console.log(roles);
+
+      if (roles.includes("Client")) {
         navigate("/user", { replace: true });
-      } else if (roles.includes(5150)) {
+      } else if (roles.includes("Admin")) {
         navigate("/admin", { replace: true });
-      } else if (roles.includes(3001)) {
+      } else if (roles.includes("Trainer")) {
         navigate("/trainer", { replace: true });
       } else {
         navigate("/missing", { replace: true });

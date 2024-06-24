@@ -136,7 +136,7 @@ export const Register = () => {
               onSubmit={handleSubmit}
             >
               <label htmlFor="username" className="block mb-2">
-                Username:
+                Name:
               </label>
               <input
                 type="text"

@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 const ProtectedRoute = ({ allowedRoles }) => {
   const { auth } = useAuth();
 
-  return auth?.roles?.find((role) => allowedRoles.includes(role)) ? (
+  return allowedRoles.includes(auth.roles) ? (
     <Outlet />
   ) : auth?.email ? (
     <Navigate to="/unauthorized" />
