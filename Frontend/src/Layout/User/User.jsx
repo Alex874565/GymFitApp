@@ -9,18 +9,18 @@ const User = () => {
   const [courses, setCourses] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [userData, setUserData] = useState({
-    name: "",
+    Name: "",
     email: "",
   });
 
   useEffect(() => {
-    // Decode the token to get user data
     const token = localStorage.getItem("token");
 
     if (token) {
       const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
       setUserData({
-        name: decodedToken.name,
+        Name: decodedToken.Name,
         email: decodedToken.email,
       });
     }
@@ -95,7 +95,7 @@ const User = () => {
               User Information
             </h1>
             <p>
-              <strong>Name:</strong> {userData.name}
+              <strong>Name:</strong> {userData.Name}
             </p>
             <p>
               <strong>Email:</strong> {userData.email}
