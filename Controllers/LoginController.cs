@@ -50,6 +50,7 @@ namespace GymFit.Controllers
                     Subject = new ClaimsIdentity(new[]
                     {
                         new Claim("Id", Guid.NewGuid().ToString()),
+                        new Claim("Name", user.Name),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("Password", user.Password),
                         new Claim("Role", user.Role),
