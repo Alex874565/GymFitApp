@@ -5,7 +5,7 @@
         
         public string Name { get; set; }
 
-        public virtual Subscription? Subscription { get; set; }
+        public int Subscription { get; set; }
 
        
     }

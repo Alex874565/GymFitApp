@@ -51,6 +51,7 @@ namespace GymFit.Controllers
                     {
                         new Claim("Id", Guid.NewGuid().ToString()),
                         new Claim("Name", user.Name),
+                        new Claim("Subscription", user.Subscription.ToString()),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("Password", user.Password),
                         new Claim("Role", user.Role),
