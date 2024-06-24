@@ -12,7 +12,6 @@ import ProtectedRoute from "./Layout/ProtectedRoute";
 import CourseSchedulePage from "./Layout/Courses/CourseSchedulePage";
 import { Courses } from "./Layout/Courses/Courses";
 import { Trainers } from "./Layout/Trainers/Trainers";
-import {TrainerDetails} from "./Layout/Trainers/TrainerDetails";
 import {Subscriptions} from "./Layout/Subscriptions/Subscriptions";
 import {SubscriptionDetails} from "./Layout/Subscriptions/SubscriptionDetails";
 
@@ -45,7 +44,6 @@ function App() {
             path="course-schedule/:courseId"
             element={<CourseSchedulePage />}
           />
-          <Route path="trainer-details/:trainerId" element={<TrainerDetails />} />
           <Route path="courses" element={<Courses />} />
           <Route path="trainers" element={<Trainers />} />
           <Route path="subscriptions" element={<Subscriptions />} />

@@ -66,8 +66,8 @@ const User = () => {
 
             const parsedResponse = response.data;
             if (parsedResponse && Array.isArray(parsedResponse.value)) {
-              setCourses(parsedResponse.value.filter(course => course.Subscription == subscription.ID));
-              console.log("Courses set to:", parsedResponse.value);
+              setCourses(parsedResponse.value.filter(course => course.ID == subscription.Course_Id));
+              console.log("Courses set to:", parsedResponse.value.filter(course => course.ID == subscription.Course_Id));
             } else {
               console.error(
                   "Unexpected response format for courses:",
@@ -133,13 +133,15 @@ const User = () => {
                     <h3 className="text-2xl font-bold text-center mt-4">
                       Courses
                     </h3>
-                    <ul>
                       {courses.map((course) => {
-                          <Link to={`course-schedule/${course.ID}`} key={course.ID} className="mt-2">
-                            {course.Name}
-                          </Link>
+                        return (
+                          <>
+                            <Link to={`course-schedule/${course.ID}`} key={course.ID} className="mt-2">
+                              <strong>Name:</strong> {course.Name}
+                            </Link>
+                          </>
+                        )
                       })}
-                    </ul>
                   </>
                 ) : (
                   <p>No courses associated with this subscription.</p>
