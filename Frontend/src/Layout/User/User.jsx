@@ -138,17 +138,15 @@ const User = () => {
                     <h3 className="text-2xl font-bold text-center mt-4">
                       Courses
                     </h3>
-                    <ul>
-                      {courses.map((course) => {
-                        <Link
-                          to={`course-schedule/${course.ID}`}
-                          key={course.ID}
-                          className="mt-2"
-                        >
-                          {course.Name}
-                        </Link>;
-                      })}
-                    </ul>
+                    {courses.map((course) => {
+                      <Link
+                        to={`course-schedule/${course.ID}`}
+                        key={course.ID}
+                        className="mt-2"
+                      >
+                        {course.Name}
+                      </Link>;
+                    })}
                   </>
                 ) : (
                   <p>No courses associated with this subscription.</p>
