@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import {TrainerCourses} from "./TrainerCourses";
 
 const TrainerCard = ({ trainer }) => {
   return (
@@ -17,6 +19,7 @@ const TrainerCard = ({ trainer }) => {
         <p className="text-gray-700 mb-2">Description: {trainer.Description}</p>
         <p className="text-gray-700 mb-2">Email: {trainer.Email}</p>
       </div>
+    <TrainerCourses trainerId={trainer.ID}/>
     </div>
   );
 };

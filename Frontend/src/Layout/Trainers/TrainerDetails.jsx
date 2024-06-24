@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {TrainerCourses} from "./TrainerCourses";
 import Navbar from "../User/Navbar";
 
 export const TrainerDetails = () => {
-  const [trainer, setTrainer] = useState(null);
-  const { trainerId } = useParams();
-  const [error, setError] = useState(null);
-
-  const fetchTrainer = async () => {
-    try {
-      const response = await axios.get(
-        `https://gymfitapi.azurewebsites.net/odata/Trainers?$filter=ID eq ${trainerId}`
-      );
-      setTrainer(response.data.value[0]);
-      console.log(response);
-    } catch (err) {
-      console.error("API Fetch Error for trainer:", err);
-      setError("Failed to fetch trainer");
-    }
-  };
+    const [trainer, setTrainer] = useState(null);
+    const {trainerId} = useParams();
+    const [error, setError] = useState(null);
+    const fetchTrainer = async () => {
+        try {
+            const response = await axios.get(
+                `https://gymfitapi.azurewebsites.net/odata/Trainers?$filter=ID eq '${trainerId}'`
+            );
+            setTrainer(response.data.value.filter((trainer) => {return trainer.ID == trainerId})[0]);
+        } catch (err) {
+            console.error("API Fetch Error for course:", err);
+            setError("Failed to fetch course");
+        }
+    };
 
   useEffect(() => {
     fetchTrainer();

@@ -3,13 +3,14 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import img3 from "../../assets/image3.png";
+import {Link} from "react-router-dom";
 
 const User = () => {
   const [error, setError] = useState(null);
   const [courses, setCourses] = useState([]);
   const [subscription, setSubscription] = useState(null);
   const [userData, setUserData] = useState({
-    Name: "",
+    name: "",
     email: "",
   });
 
@@ -18,9 +19,8 @@ const User = () => {
 
     if (token) {
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
       setUserData({
-        Name: decodedToken.Name,
+        name: decodedToken.Name,
         email: decodedToken.email,
       });
     }
@@ -35,7 +35,7 @@ const User = () => {
 
         const parsedResponse = response.data;
         if (parsedResponse && Array.isArray(parsedResponse.value)) {
-          setSubscription(parsedResponse.value[0]);
+          setSubscription(parsedResponse.value.filter(subscription => subscription.ID == jwtDecode(token).Subscription)[0]);
           console.log("Subscription set to:", parsedResponse.value[0]);
         } else {
           console.error(
@@ -50,34 +50,41 @@ const User = () => {
       }
     };
 
-    // Fetch courses data
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get(
-          "https://gymfitapi.azurewebsites.net/odata/Courses"
-        );
-        console.log("Courses API Response (raw):", response.data);
-
-        const parsedResponse = response.data;
-        if (parsedResponse && Array.isArray(parsedResponse.value)) {
-          setCourses(parsedResponse.value);
-          console.log("Courses set to:", parsedResponse.value);
-        } else {
-          console.error(
-            "Unexpected response format for courses:",
-            parsedResponse
-          );
-          setError("Unexpected response format for courses");
-        }
-      } catch (err) {
-        console.error("API Fetch Error for courses:", err);
-        setError("Failed to fetch courses");
-      }
-    };
-
     fetchSubscription();
-    fetchCourses();
+
   }, []);
+
+  useEffect(() =>
+      {
+        // Fetch courses data
+        const fetchCourses = async () => {
+          try {
+            const response = await axios.get(
+                "https://gymfitapi.azurewebsites.net/odata/Courses"
+            );
+            console.log("Courses API Response (raw):", response.data);
+
+            const parsedResponse = response.data;
+            if (parsedResponse && Array.isArray(parsedResponse.value)) {
+              setCourses(parsedResponse.value.filter(course => course.Subscription == subscription.ID));
+              console.log("Courses set to:", parsedResponse.value);
+            } else {
+              console.error(
+                  "Unexpected response format for courses:",
+                  parsedResponse
+              );
+              setError("Unexpected response format for courses");
+            }
+          } catch (err) {
+            console.error("API Fetch Error for courses:", err);
+            setError("Failed to fetch courses");
+          }
+        };
+        if(subscription) {
+          fetchCourses()
+        }
+      }
+  , [subscription])
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -95,7 +102,7 @@ const User = () => {
               User Information
             </h1>
             <p>
-              <strong>Name:</strong> {userData.Name}
+              <strong>Name:</strong> {userData.name}
             </p>
             <p>
               <strong>Email:</strong> {userData.email}
@@ -121,19 +128,16 @@ const User = () => {
                 <p>
                   <strong>Duration:</strong> {subscription.Duration}
                 </p>
-                {subscription.Courses && subscription.Courses.length > 0 ? (
+                {courses && courses.length > 0 ? (
                   <>
                     <h3 className="text-2xl font-bold text-center mt-4">
                       Courses
                     </h3>
                     <ul>
-                      {subscription.Courses.map((courseId) => {
-                        const course = courses.find((c) => c.ID === courseId);
-                        return course ? (
-                          <li key={course.ID} className="mt-2">
+                      {courses.map((course) => {
+                          <Link to={`course-schedule/${course.ID}`} key={course.ID} className="mt-2">
                             {course.Name}
-                          </li>
-                        ) : null;
+                          </Link>
                       })}
                     </ul>
                   </>
